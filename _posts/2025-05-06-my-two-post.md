@@ -7,7 +7,6 @@ tags: [Azure 자격증]
 header:
   overlay_image: /assets/images/ai-102.png
   caption: "Minimal Mistakes 샘플 썸네일"
-comments: true
 ---
 
 # AI-102 로드맵 (실전형 학습 경로)

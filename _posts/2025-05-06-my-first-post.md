@@ -7,7 +7,6 @@ tags: [Azure 우대]
 header:
   overlay_image: /assets/images/Azure.png
   caption: "Minimal Mistakes 샘플 썸네일"
-comments: true
 ---
 
 | 기업명           | Azure 활용 분야                        | Azure 경력 인정 여부         | 비고                                       |
