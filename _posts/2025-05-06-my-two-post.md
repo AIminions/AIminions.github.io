@@ -6,8 +6,10 @@ categories: [AI]
 tags: [Azure 자격증]
 header:
   overlay_image: /assets/images/ai-102.png
+  teaser: /assets/images/ai-102.png
   caption: "Minimal Mistakes 샘플 썸네일"
 ---
+
 <style>
 /* ─── 썸네일 크기 조절 ───────────────────────────── */
 .page__hero--overlay {
