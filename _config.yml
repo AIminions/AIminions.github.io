@@ -49,6 +49,7 @@ comments:
     theme: # "github-light" (default), "github-dark"
     issue_term: # "pathname" (default)
   giscus:
+    repo: "AIminions/AIminions.github.io"
     repo_id: "R_kgDOOlQBnw"
     category_name: "General"
     category_id: "DIC_kwDOOlQBn84Cp07S"
