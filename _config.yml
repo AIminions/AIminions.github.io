@@ -49,16 +49,17 @@ comments:
     theme: # "github-light" (default), "github-dark"
     issue_term: # "pathname" (default)
   giscus:
-    repo_id: R_kgDOOlQBnw
+    repo: "AIminions/AIminions.github.io"
+    repo_id: "R_kgDOOlQBnw"
     category_name: "General"
-    category_id: DIC_kwDOOlQBn84Cp07S
-    discussion_term: pathname
+    category_id: "DIC_kwDOOlQBn84Cp07S"
+    discussion_term: "pathname"
     reactions_enabled: "1"
-    theme: preferred_color_scheme
+    theme: "preferred_color_scheme"
     strict: "0"
-    input_position: bottom
+    input_position: "bottom"
     emit_metadata: "0"
-    lang: en
+    lang: "en"
     lazy: false
   staticman:
     branch: # "master"
