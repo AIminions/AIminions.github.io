@@ -35,3 +35,19 @@
 @import "minimal-mistakes/archive";
 @import "minimal-mistakes/sidebar";
 @import "minimal-mistakes/print";
+
+// ===== Custom Styles for Search Icon Position =====
+.search__toggle.left-search {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  font-size: 1.2rem;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  align-self: center;
+
+  // 정렬이 잘 안되면 강제로 플렉스 기준 맞추기
+  display: flex;
+  align-items: center;
+}
