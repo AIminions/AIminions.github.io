@@ -35,7 +35,7 @@ enable_copy_code_button: # true, false (default)
 copyright: # "copyright" name, defaults to site.title
 copyright_url: # "copyright" URL, defaults to site.url
   comments:
-    provider: "giscus"
+    provider: giscus
     disqus:
       shortname: # https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-
     discourse:
@@ -53,7 +53,7 @@ copyright_url: # "copyright" URL, defaults to site.url
       repo_id: "R_kgDOOlQBnw"
       category_name: "General"
       category_id: "DIC_kwDOOlQBn84Cp07S"
-      discussion_term: "title"
+      discussion_term: "pathname"
       reactions_enabled: "1"
       theme: "preferred_color_scheme"
       strict: "0"
