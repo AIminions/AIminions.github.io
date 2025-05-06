@@ -8,7 +8,14 @@ header:
   overlay_image: /assets/images/ai-102.png
   caption: "Minimal Mistakes 샘플 썸네일"
 ---
-
+<style>
+/* ─── 썸네일 크기 조절 ───────────────────────────── */
+.page__hero--overlay {
+  height: 200px !important;           /* 원하는 높이(px)로 조절 */
+  background-size: contain !important;/* 이미지 비율 유지하면서 축소 */
+  background-position: center center;
+}
+<style>
 # AI-102 로드맵 (실전형 학습 경로)
 
 ### 1단계: 기본기 다지기 (필수 기초)
