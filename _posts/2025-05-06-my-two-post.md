@@ -1,9 +1,9 @@
 ---
 layout: single
-title: "Azure 우대 기업"
+title: "AI-102 자격증"
 date: 2025-05-06
-categories: [Blog, AI]
-tags: [Azure 자격증, AI fundimental]
+categories: [AI]
+tags: [Azure 자격증]
 header:
   overlay_image: /assets/images/ai-102.png
   caption: "Minimal Mistakes 샘플 썸네일"

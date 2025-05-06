@@ -2,7 +2,7 @@
 layout: single
 title: "Azure 우대 기업"
 date: 2025-05-06
-categories: [Blog, AI]
+categories: [AI]
 tags: [Azure 우대]
 header:
   overlay_image: /assets/images/Azure.png
