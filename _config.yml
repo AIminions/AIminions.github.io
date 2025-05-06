@@ -7,7 +7,7 @@
 
 # Theme Settings
 #
-# Review documentation to determine if you should use `theme` or `remote_theme`
+# Review documentation to determine if you should use `theme` or `remote_theme
 # https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/#installing-the-theme
 
 # theme                  : "minimal-mistakes-jekyll"
@@ -69,8 +69,8 @@ reCaptcha:
 atom_feed:
   path: # blank (default) uses feed.xml
   hide: # true, false (default)
-search: # true, false (default)
-search_full_content: # true, false (default)
+search: true
+search_full_content: true
 search_provider: # lunr (default), algolia, google
 lunr:
   search_within_pages: # true, false (default)

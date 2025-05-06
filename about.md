@@ -10,13 +10,39 @@ permalink: /about/
 
 ---
 
-> 🧭 "세상에 없는 지식을 발견하고자 하는 AI 엔지니어"
-
 저는 비전공자로 시작해 **실무형 AI 프로젝트 경험**을 쌓으며 성장 중인 AI 엔지니어입니다.  
 현재는 산업 도메인 특화 AI 에이전트와 **RAG 기반의 정보검색 파이프라인**,  
 그리고 **공공 분야의 AI 솔루션**을 중심으로 프로젝트를 수행하고 있습니다.
 
-<!-- ...중략... -->
+---
+
+## Key Projects & Areas of Focus
+
+<details>
+<summary> 산업 특화 AI agent</summary>
+
+> 공연 데이터를 기반으로 도메인 특화 정보를 추출하는 RAG 에이전트 개발
+>
+> [![Azure Cognitive Search](https://img.shields.io/badge/Azure_Cognitive_Search-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](https://azure.microsoft.com/en-us/products/search/) > [![Azure OpenAI](https://img.shields.io/badge/Azure_OpenAI-0089D6?style=flat-square&logo=openai&logoColor=white)](https://azure.microsoft.com/en-us/products/cognitive-services/openai-service/) > [![LangChain](https://img.shields.io/badge/LangChain-black?style=flat-square)](https://www.langchain.com/)
+>
+> 🔗 [프로젝트 보기](https://github.com/AIM-Artificial-Intelligence-Momentum/RAG)
+
+</details>
+
+---
+
+<details>
+<summary> 영유아 질식사 방지 AI</summary>
+
+> YOLO 기반 객체 탐지로 위험 자세를 실시간 감지하는 안전 솔루션
+>
+> [![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white)](https://pytorch.org/) > [![YOLOv8](https://img.shields.io/badge/YOLOv8-FFBF00?style=flat-square&logo=yolo&logoColor=black)](https://github.com/ultralytics/yolov8) > [![Azure ML](https://img.shields.io/badge/Azure_ML-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](https://azure.microsoft.com/en-us/products/machine-learning/)
+>
+> 🔗 [프로젝트 보기](https://github.com/SafeBabyAI/main)
+
+</details>
+
+---
 
 ## 📫 Contact
 
