@@ -17,7 +17,8 @@ header:
   background-size: contain !important;/* 이미지 비율 유지하면서 축소 */
   background-position: center center;
 }
-<style>
+</style>
+
 # AI-102 로드맵 (실전형 학습 경로)
 
 ### 1단계: 기본기 다지기 (필수 기초)
