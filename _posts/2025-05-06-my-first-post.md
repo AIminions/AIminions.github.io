@@ -1,9 +1,9 @@
 ---
 layout: single
-title: "첫 번째 블로그 글"
+title: "Azure 우대 기업"
 date: 2025-05-06
 categories: [Blog, AI]
-tags: [GPT, Azure, Azure 우대]
+tags: [Azure 우대]
 header:
   overlay_image: /assets/images/Azure.png
   caption: "Minimal Mistakes 샘플 썸네일"
