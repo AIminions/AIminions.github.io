@@ -34,33 +34,33 @@ words_per_minute: 200
 enable_copy_code_button: # true, false (default)
 copyright: # "copyright" name, defaults to site.title
 copyright_url: # "copyright" URL, defaults to site.url
-comments:
-  provider: giscus
-  disqus:
-    shortname: # https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-
-  discourse:
-    server: # https://meta.discourse.org/t/embedding-discourse-comments-via-javascript/31963 , e.g.: meta.discourse.org
-  facebook:
-    # https://developers.facebook.com/docs/plugins/comments
-    appid:
-    num_posts: # 5 (default)
-    colorscheme: # "light" (default), "dark"
-  utterances:
-    theme: # "github-light" (default), "github-dark"
-    issue_term: # "pathname" (default)
-  giscus:
-    repo: "AIminions/AIminions.github.io"
-    repo_id: "R_kgDOOlQBnw"
-    category_name: "General"
-    category_id: "DIC_kwDOOlQBn84Cp07S"
-    discussion_term: "pathname"
-    reactions_enabled: "1"
-    theme: "preferred_color_scheme"
-    strict: "0"
-    input_position: "bottom"
-    emit_metadata: "0"
-    lang: "ko"
-    lazy: false
+  comments:
+    provider: giscus
+    disqus:
+      shortname: # https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-
+    discourse:
+      server: # https://meta.discourse.org/t/embedding-discourse-comments-via-javascript/31963 , e.g.: meta.discourse.org
+    facebook:
+      # https://developers.facebook.com/docs/plugins/comments
+      appid:
+      num_posts: # 5 (default)
+      colorscheme: # "light" (default), "dark"
+    utterances:
+      theme: # "github-light" (default), "github-dark"
+      issue_term: # "pathname" (default)
+    giscus:
+      repo: "AIminions/AIminions.github.io"
+      repo_id: "R_kgDOOlQBnw"
+      category_name: "General"
+      category_id: "DIC_kwDOOlQBn84Cp07S"
+      discussion_term: "pathname"
+      reactions_enabled: "1"
+      theme: "preferred_color_scheme"
+      strict: "0"
+      input_position: "bottom"
+      emit_metadata: "0"
+      lang: "ko"
+      lazy: false
   staticman:
     branch: # "master"
     endpoint: # "https://{your Staticman v3 API}/v3/entry/github/"
