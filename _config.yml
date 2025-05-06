@@ -53,7 +53,7 @@ copyright_url: # "copyright" URL, defaults to site.url
       repo_id: "R_kgDOOlQBnw"
       category_name: "General"
       category_id: "DIC_kwDOOlQBn84Cp07S"
-      discussion_term: "pathname"
+      discussion_term: "title"
       reactions_enabled: "1"
       theme: "preferred_color_scheme"
       strict: "0"
