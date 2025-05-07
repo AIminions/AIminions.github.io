@@ -322,3 +322,7 @@ defaults:
       comments: true
       share: true
       related: true
+      toc: true # 목차 켜기
+      toc_label: "목차" # 목차 제목 텍스트
+      toc_sticky: true # 스크롤 시 고정
+      toc_position: right # 오른쪽 표시
