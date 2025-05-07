@@ -1,0 +1,2 @@
+{%- assign words = include.content | number_of_words -%} {%- assign minutes =
+words | divided_by: 200 | ceil -%} {{ minutes }} minute read

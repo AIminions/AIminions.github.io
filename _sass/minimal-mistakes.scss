@@ -51,3 +51,15 @@
   display: flex;
   align-items: center;
 }
+
+.author__name {
+  font-size: 1.1rem !important; /* 기본은 1.5rem 정도 */
+}
+
+.author__bio {
+  font-size: 0.9rem !important; /* 기본은 약 1rem 이상 */
+}
+
+.author__urls {
+  font-size: 0.85rem !important;
+}
