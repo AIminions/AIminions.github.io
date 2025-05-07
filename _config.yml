@@ -12,7 +12,7 @@
 
 # theme                  : "minimal-mistakes-jekyll"
 # remote_theme           : "mmistakes/minimal-mistakes"
-minimal_mistakes_skin: "contrast" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin: "dirt" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale: "en-US"
@@ -118,7 +118,7 @@ author:
   name: "AIminions"
   avatar: "/assets/images/profile.jpg"
   bio: "'세상에 없는 지식을 발견하고자 하는 AI 엔지니어'"
-  location: "Somewhere"
+  location: "🇰🇷 AI Engineer"
   email:
   links:
     - label: "Email"
@@ -154,7 +154,7 @@ footer:
       # url:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url:
+      url: "https://AIminions.github.io"
     - label: "GitLab"
       icon: "fab fa-fw fa-gitlab"
       # url:
@@ -164,6 +164,9 @@ footer:
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url:
+    - label: "LinkedIn"
+      icon: "fab fa-linkedin"
+      url: "https://www.linkedin.com/in/현수-이-356b45346/"
 
 # Reading Files
 include:
