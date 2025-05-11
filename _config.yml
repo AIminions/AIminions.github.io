@@ -135,7 +135,7 @@ author:
       # url: "https://facebook.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://AIminions.github.io"
+      url: "https://github.com/AIminions"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
@@ -154,7 +154,7 @@ footer:
       # url:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://AIminions.github.io"
+      url: "https://github.com/AIminions"
     - label: "GitLab"
       icon: "fab fa-fw fa-gitlab"
       # url:
