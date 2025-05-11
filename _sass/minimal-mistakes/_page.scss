@@ -25,7 +25,7 @@ body {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
 }
 
 .initial-content,
@@ -34,32 +34,38 @@ body {
 }
 
 .page {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding-inline: 1.5rem;
+
+  @include breakpoint($medium) {
+    width: 95%;
+    max-width: 1100px;
+    padding-inline: 2rem;
+  }
+
   @include breakpoint($large) {
-    float: inline-end;
-    width: calc(100% - #{$right-sidebar-width-narrow});
-    padding-inline-end: $right-sidebar-width-narrow;
+    width: 95%;
+    max-width: 1200px;
+    padding-inline: 2rem;
   }
 
   @include breakpoint($x-large) {
-    width: calc(100% - #{$right-sidebar-width});
-    padding-inline-end: $right-sidebar-width;
+    width: 95%;
+    max-width: 1400px;
+    padding-inline: 2.5rem;
   }
 
   .page__inner-wrap {
-    float: inline-start;
-    margin-top: 1em;
-    margin-inline: 0;
     width: 100%;
-    clear: both;
+    margin: 0 auto;
 
     .page__content,
     .page__meta,
     .page__share {
-      position: relative;
-      float: inline-start;
-      margin-inline: 0;
       width: 100%;
-      clear: both;
+      padding-inline: 0;
     }
   }
 }
@@ -84,27 +90,41 @@ body {
 }
 
 .page__content {
-  h2 {
-    padding-bottom: 0.5em;
-    border-bottom: 1px solid $border-color;
+  padding-inline: 1rem;
+
+  @include breakpoint($medium) {
+    padding-inline: 1.5rem;
   }
 
-	h1, h2, h3, h4, h5, h6 {
-		.header-link {
-			position: relative;
-			inset-inline-start: 0.5em;
-			opacity: 0;
-			font-size: 0.8em;
-			-webkit-transition: opacity 0.2s ease-in-out 0.1s;
-			-moz-transition: opacity 0.2s ease-in-out 0.1s;
-			-o-transition: opacity 0.2s ease-in-out 0.1s;
-			transition: opacity 0.2s ease-in-out 0.1s;
-		}
+  @include breakpoint($large) {
+    padding-inline: 2rem;
+  }
 
-		&:hover .header-link {
-			opacity: 1;
-		}
-	}
+  @include breakpoint($x-large) {
+    padding-inline: 2.5rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    .header-link {
+      position: relative;
+      inset-inline-start: 0.5em;
+      opacity: 0;
+      font-size: 0.8em;
+      -webkit-transition: opacity 0.2s ease-in-out 0.1s;
+      -moz-transition: opacity 0.2s ease-in-out 0.1s;
+      -o-transition: opacity 0.2s ease-in-out 0.1s;
+      transition: opacity 0.2s ease-in-out 0.1s;
+    }
+
+    &:hover .header-link {
+      opacity: 1;
+    }
+  }
 
   p,
   li,
@@ -517,24 +537,17 @@ body {
    ========================================================================== */
 
 .page__related {
-  @include clearfix();
-  float: inline-start;
-  margin-top: 2em;
-  padding-top: 1em;
-  border-top: 1px solid $border-color;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-inline: 2rem;
 
   @include breakpoint($large) {
-    float: inline-end;
-    width: calc(100% - #{$right-sidebar-width-narrow});
+    padding-inline: 2rem;
   }
 
   @include breakpoint($x-large) {
-    width: calc(100% - #{$right-sidebar-width});
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
+    padding-inline: 2.5rem;
   }
 }
 
@@ -549,7 +562,8 @@ body {
    ========================================================================== */
 
 .wide {
-  .page, .page__related {
+  .page,
+  .page__related {
     @include breakpoint($large) {
       padding-inline-end: 0;
     }
@@ -557,5 +571,17 @@ body {
     @include breakpoint($x-large) {
       padding-inline-end: 0;
     }
+  }
+}
+
+.sidebar {
+  margin-left: -200px; // or -80px, 조절 가능
+  z-index: 1;
+}
+
+/* 반응형 대응: 모바일에서는 다시 가운데로 */
+@media screen and (max-width: 768px) {
+  .sidebar {
+    margin-left: 0;
   }
 }

@@ -8,13 +8,13 @@
 
   @include breakpoint($large) {
     float: inline-end;
-    width: calc(100% - #{$right-sidebar-width-narrow});
-    padding-inline-end: $right-sidebar-width-narrow;
+    width: calc(100% - 200px); // 🔧 기존보다 더 넓게
+    padding-inline-end: 200px;
   }
 
   @include breakpoint($x-large) {
-    width: calc(100% - #{$right-sidebar-width});
-    padding-inline-end: $right-sidebar-width;
+    width: calc(100% - 240px); // 🔧 기존보다 더 넓게
+    padding-inline-end: 240px;
   }
 }
 
