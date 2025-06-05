@@ -114,12 +114,16 @@ GPU 자원을 직접 사용해서 연산을 해주는 고마운 도구입니다.
 ## .empty
 
 아래 사진처럼 .empty 는 **텐서** 즉, 데이터를 담을 그릇을 만들어주는데 empty는 초기화는 전혀 하지 않은채로 생성시켜줘요.
+
 <img src="/assets/images/DNN study1.png" alt=".empty 설명1" style="width:50%;">
+
 그러나 이 값들이 모두 0이라서 .zeros라고 생각할 수 있지만
 어쩌다 우연하게 0으로 생성된 쓰레기값(Garbage value) 입니다. 임의의 값이므로 우연히 해당 메모리 공간에 0이 있었을 뿐 이에요.
 
 방금 또 이름만 같은 새로운 변수(X2)에 넣었는데
+
 <img src="/assets/images/DNN study2.png" alt=".empty 설명2" style="width:50%;">
+
 값이 달라졌죠. 저 값들은 이전 데이터 값 입니다.
 
 > PyTorch는 성능을 위해 OS로부터 받은 메모리 공간을 "그냥 쓰기 시작"한다.
