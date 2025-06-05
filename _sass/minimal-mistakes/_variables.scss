@@ -10,7 +10,7 @@
   1. 본문 기준 글자 크기: 16px (웹 표준)
   2. 상대 비율로 계산된 타입 스케일을 유지
 */
-$doc-font-size: 16px !default; // (기본값 유지)
+$doc-font-size: 13px !default; // (기본값 유지)
 $doc-font-size-medium: $doc-font-size * 1.125 !default; // 18px
 $doc-font-size-large: $doc-font-size * 1.25 !default; // 20px
 $doc-font-size-x-large: $doc-font-size * 1.375 !default; // 22px
