@@ -139,8 +139,8 @@ PyTorch로 만든 모델을 TensorFlow, Caffe 등 다른 프레임워크에서�
 
 <img src="/assets/images/DNN study1.png" alt=".empty 설명1" style="width:50%;">
 
-그러나 이 값들이 모두 0이라서 .zeros라고 생각할 수 있지만
-어쩌다 우연하게 0으로 생성된 쓰레기값(Garbage value) 입니다. 임의의 값이므로 우연히 해당 메모리 공간에 0이 있었을 뿐 이에요.
+이 값들이 모두 0이라서 .zeros 와 같은 기능인가? 라고 생각하실 수 있지만
+어쩌다 우연하게 0으로 생성된 **쓰레기값(Garbage value)** 입니다. 임의의 값이므로 우연히 해당 메모리 공간에 0이 있었을 뿐 이에요.
 
 방금 또 이름만 같은 새로운 변수(X2)에 넣었는데
 
