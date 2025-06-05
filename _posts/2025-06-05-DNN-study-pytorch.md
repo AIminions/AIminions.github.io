@@ -6,7 +6,7 @@ categories: [파이토치]
 tags: [딥러닝]
 header:
   overlay_image: /assets/images/pytorch.png
-  teaser: /assets/images/aischool.png
+  teaser: /assets/images/pytorch.png
   caption: "AI school 로고"
 ---
 
