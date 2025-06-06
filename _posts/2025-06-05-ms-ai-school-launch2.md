@@ -60,17 +60,17 @@ print(c)  # tensor([100, 200,   3]) → numpy와 메모리 공유됨
 
 ## dtype 자동 추론의 위험
 
-torch.tensor([1.0, 2.0])처럼 사용하면 float32가 아니라 float64로 초기화됩니다.
+`torch.tensor([1.0, 2.0])`처럼 사용하면 float32가 아니라 float64로 초기화됩니다.
 
-이는 model.parameters()처럼 float32로 초기화된 텐서와 함께 연산하면 dtype mismatch가 발생할 수 있습니다.
+이는 `model.parameters()`처럼 float32로 초기화된 텐서와 함께 연산하면 dtype mismatch가 발생할 수 있습니다.
 
-> 특히 torch.tensor(..., dtype=torch.float32)를 명시하지 않으면 예상치 못한 타입 에러 발생 가능
+> 특히 `torch.tensor(..., dtype=torch.float32)`를 명시하지 않으면 예상치 못한 타입 에러 발생 가능
 
 ---
 
 ## requires_grad 설정과 그래프 연결 여부
 
-torch.tensor(data, requires_grad=True)로 만들면, 기존 데이터를 베이스로 연산 그래프를 새로 생성해요.
+`torch.tensor(data, requires_grad=True)`로 만들면, 기존 데이터를 베이스로 연산 그래프를 새로 생성해요.
 
 반면, 연산을 통해 만들어진 텐서는 그래프에 연결됩니다 이는 역전파 구조를 설계할 때 혼동을 유발합니다.
 
