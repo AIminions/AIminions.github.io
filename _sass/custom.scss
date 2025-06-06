@@ -383,3 +383,32 @@
   pointer-events: none;
   cursor: default;
 }
+/* 모든 본문 텍스트 기본 색상: 완전 검정 */
+body,
+.archive__item-title,
+.archive__item,
+.page__content,
+.page__meta,
+.site-title {
+  color: #111 !important; // 아주 진한 검정
+}
+
+/* 링크 색상도 검정(선택사항) */
+a,
+a:visited {
+  color: #111 !important;
+}
+
+/* (선택) 카드 내 텍스트 */
+.archive__item-body {
+  color: #111 !important;
+}
+.archive__item-title a {
+  text-decoration: none !important; /* 밑줄 제거 */
+}
+
+.archive__item-title a:hover,
+.archive__item-title a:active,
+.archive__item-title a:focus {
+  text-decoration: underline !important; /* (선택) 마우스 올릴 때만 밑줄 */
+}
