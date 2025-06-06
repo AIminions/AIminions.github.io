@@ -2,33 +2,25 @@
    custom.scss (Override 전용)
    ======================================================================== */
 
-/* =====================================================================
-   [A] entries-grid: “큰 화면 5열 / 중간 3열 / 작은 화면 1열”
-   ===================================================================== */
+/* [A] entries-grid: “큰 화면 5열 / 중간 3열 / 작은 화면 1열” */
 .entries-grid {
   display: grid;
-  grid-gap: 1rem; // 카드 간격 통일
+  grid-gap: 1rem;
   margin: 0;
   padding: 0;
   list-style: none;
-
-  /* 1) 큰 화면(large 이상)에서 5열, 최소 너비 240px 보장 */
   @include breakpoint($large) {
     grid-template-columns: repeat(5, minmax(240px, 1fr));
   }
-  /* 2) 중간 화면(medium 이하)에서 3열 */
   @include breakpoint($medium) {
     grid-template-columns: repeat(3, minmax(240px, 1fr));
   }
-  /* 3) 작은 화면(small 이하)에서 1열 */
   @include breakpoint($small) {
     grid-template-columns: repeat(1, minmax(240px, 1fr));
   }
 }
 
-/* ----------------------------------------------------------------------------
-     [B] 각 카드(.grid__item) 내부: 세로 정렬
-     ---------------------------------------------------------------------------- */
+/* [B] 각 카드(.grid__item) 내부: 세로 정렬 */
 .entries-grid .grid__item {
   display: flex;
   flex-direction: column;
@@ -36,9 +28,7 @@
   width: 100%;
 }
 
-/* =====================================================================
-     [C] 메인페이지 카드(.entries-grid > .archive__item)만 흰색 배경, 부드러운 그림자
-     ===================================================================== */
+/* [C] 메인페이지 카드(.entries-grid > .archive__item)만 흰색 배경, 그림자 */
 .entries-grid .archive__item {
   max-width: 240px;
   width: 100%;
@@ -55,13 +45,11 @@
   }
 }
 
-/* =====================================================================
-     [D] 썸네일 (16:9 비율 고정 + object-fit: cover)
-     ===================================================================== */
+/* [D] 썸네일 (16:9 비율 고정 + object-fit: cover) */
 .archive__item-teaser {
   position: relative;
   width: 100%;
-  padding-top: 45%; /* 9/16 = 0.5625 × 100% */
+  padding-top: 45%; /* 16:9 */
   overflow: hidden;
   flex-shrink: 0;
   img {
@@ -75,14 +63,13 @@
   }
 }
 
-/* =====================================================================
-     [E] 카드 본문(.archive__item-body): 제목 / 메타 / 태그
-     ===================================================================== */
+/* [E] 카드 본문: 제목 / 메타 / 태그 */
 .archive__item-body {
   padding: 0.75rem 1rem 1.75rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  color: #111 !important;
 }
 .archive__item-title {
   font-size: 1rem;
@@ -104,9 +91,7 @@
   }
 }
 
-/* =====================================================================
-     [F] 메인 카드 하단: 카테고리 · 태그 뱃지 색상 (entries-grid만)
-     ===================================================================== */
+/* [F] 카드 하단: 카테고리 · 태그 뱃지(컬러 유지) */
 .entries-grid .archive__item-cats-tags {
   margin-top: auto;
   padding-top: 0.5rem;
@@ -117,8 +102,8 @@
   margin-bottom: 0.3rem;
 }
 .entries-grid .archive__item-category {
-  background: #e3f2fd !important; /* 밝은 파랑 */
-  color: #1976d2 !important; /* 진한 파랑 */
+  background: #e3f2fd !important;
+  color: #1976d2 !important;
   font-size: 0.65rem;
   font-weight: 500;
   padding: 0.2rem 0.5rem;
@@ -157,9 +142,7 @@
   background: #e0e0e0 !important;
 }
 
-/* =====================================================================
-     [G] 반응형 보정 (Medium / Small 이하)
-     ===================================================================== */
+/* [G] 반응형 보정 */
 @include breakpoint($medium) {
   .entries-grid {
     grid-template-columns: repeat(3, minmax(240px, 1fr));
@@ -188,16 +171,12 @@
   }
 }
 
-/* =====================================================================
-     [H] 카드 컨테이너(.archive)에 오른쪽 여백 약간 추가
-     ===================================================================== */
+/* [H] 카드 컨테이너(.archive)에 오른쪽 여백 */
 .archive {
   padding-right: 1rem;
 }
 
-/* =====================================================================
-     NAVIGATION ── flex 배치 & 검색 아이콘 정렬
-     ===================================================================== */
+/* NAVIGATION ── flex 배치 & 검색 아이콘 정렬 */
 #site-nav.greedy-nav {
   display: flex;
   align-items: center;
@@ -288,9 +267,7 @@
   }
 }
 
-/* =====================================================================
-     "You may also enjoy" 카드 그리드 오버라이드 (아래 코드는 그대로 유지!)
-     ===================================================================== */
+/* "You may also enjoy" 카드 그리드 */
 .page__related .grid__wrapper {
   display: grid !important;
   grid-template-columns: repeat(4, minmax(240px, 1fr));
@@ -347,6 +324,7 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  color: #111 !important;
 }
 .page__related .archive__item-title {
   font-size: 1rem;
@@ -383,41 +361,57 @@
   pointer-events: none;
   cursor: default;
 }
-/* 모든 본문 텍스트 기본 색상: 완전 검정 */
+
+/* =====================================================================
+   본문/카드/메타/제목/링크만 검정, 버튼 등은 원래 컬러 유지
+   ===================================================================== */
 body,
 .archive__item-title,
 .archive__item,
 .page__content,
 .page__meta,
 .site-title {
-  color: #111 !important; // 아주 진한 검정
+  color: #111 !important;
 }
-
-/* 링크 색상도 검정(선택사항) */
 a,
 a:visited {
   color: #111 !important;
 }
-
-/* (선택) 카드 내 텍스트 */
 .archive__item-body {
   color: #111 !important;
 }
 .archive__item-title a {
-  text-decoration: none !important; /* 밑줄 제거 */
+  text-decoration: none !important;
 }
-
 .archive__item-title a:hover,
 .archive__item-title a:active,
 .archive__item-title a:focus {
-  text-decoration: underline !important; /* (선택) 마우스 올릴 때만 밑줄 */
+  text-decoration: underline !important;
 }
 
+/* 소셜/공유/버튼 류: 컬러 유지 */
+.social-icons a,
+.page__share a,
+.btn,
+button,
+.archive__item-category,
+.archive__item-tag {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+/* [중간선/구분선] hr */
 hr,
 .hr,
 .page__hr {
   border: none;
-  border-top: 3px solid #333; /* 굵기(3px), 색(#333=진회색) 조절 */
+  border-top: 3px solid #333;
   margin: 2em 0;
-  opacity: 1 !important; /* 투명도 해제 */
+  opacity: 1 !important;
+}
+
+/* 소셜 공유버튼(Share on) 글자 색상 하얗게 */
+.page__share a,
+.social-icons a {
+  color: #fff !important;
 }
