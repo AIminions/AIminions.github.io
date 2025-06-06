@@ -1,79 +1,104 @@
-{%- comment -%} ─────────────────────────────────────────────────────────────
-entries-item.html (예: list/grid 공용 템플릿) 1) post.header.teaser 유무에 따라
-teaser 설정 2) post.id가 있으면 markdownify+
-<p>
-  태그 제거, 없으면 순수 title 사용 3) post.locale이 있으면 lang 속성 추가 4)
-  include.type이 “grid”이고 teaser가 있을 때만 썸네일 출력 5) 제목 출력:
-  post.link 유무에 따라 달리 렌더링 6) 날짜 + 읽기 시간 계산 7) post.excerpt가
-  있으면 간단히 요약 출력
-  ───────────────────────────────────────────────────────────── {%- endcomment
-  -%} {%- comment -%} 1) teaser 변수 설정: post.header.teaser가 있으면 그대로,
-  없으면 site.teaser 사용 {%- endcomment -%} {%- if post.header.teaser -%} {%-
-  assign teaser = post.header.teaser -%} {%- else -%} {%- assign teaser =
-  site.teaser -%} {%- endif -%} {%- comment -%} 2) title 변수 설정: post.id가
-  있으면 markdownify 후
-</p>
+{%- comment -%}
+archive-single.html
+  1) post.header.teaser 유무에 따라 teaser 결정
+  2) post.id 유무에 따라 title 결정 (markdownify → 태그 제거)
+  3) Grid 모드이면서 teaser가 있을 때만 썸네일 출력
+  4) 제목(h2) 출력 (post.link 유무에 따라 분기)
+  5) 날짜 + 읽기 시간 출력
+  6) excerpt가 있을 때 간단히 요약 출력
+  7) 하단에 “카테고리·태그” 뱃지 순서대로 출력
+{%- endcomment -%}
 
-<p>
-  태그 제거 그렇지 않으면 그대로 post.title 사용 {%- endcomment -%} {%- if
-  post.id -%} {%- assign title_html = post.title | markdownify -%} {%- assign
-  title = title_html | remove: "
-</p>
+{%- if post.header.teaser -%}
+  {%- assign teaser = post.header.teaser -%}
+{%- else -%}
+  {%- assign teaser = site.teaser -%}
+{%- endif -%}
 
-<p>" | remove: "</p>
-" -%} {%- else -%} {%- assign title = post.title -%} {%- endif -%}
+{%- if post.id -%}
+  {%- assign title_html = post.title | markdownify -%}
+  {%- assign title = title_html | remove: "</p>" | remove: "<p>" -%}
+{%- else -%}
+  {%- assign title = post.title -%}
+{%- endif -%}
 
 <div class="{{ include.type | default: 'list' }}__item">
   <article
     class="archive__item"
     itemscope
     itemtype="https://schema.org/CreativeWork"
-    {%-
-    if
-    post.locale
-    %}
-    lang="{{ post.locale }}"
-    {%-
-    endif
-    %}
+    {%- if post.locale -%} lang="{{ post.locale }}" {%- endif -%}
   >
-    {%- comment -%} 3) Grid 모드이면서 teaser가 있으면 썸네일 출력 {%-
-    endcomment -%} {%- if include.type == "grid" and teaser -%}
-    <div class="archive__item-teaser">
-      <img src="{{ teaser | relative_url }}" alt="" />
-    </div>
-    {%- endif -%} {%- comment -%} 4) 제목(h2) 및 링크 출력 {%- endcomment -%}
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      {%- if post.link -%}
-      <a href="{{ post.link }}">{{ title }}</a>
-      <a href="{{ post.url | relative_url }}" rel="permalink">
-        <i class="fas fa-link" aria-hidden="true" title="Permalink"></i>
-        <span class="sr-only">Permalink</span>
-      </a>
-      {%- else -%}
-      <a href="{{ post.url | relative_url }}" rel="permalink">{{ title }}</a>
-      {%- endif -%}
-    </h2>
 
-    {%- comment -%} 5) 날짜 + 읽기 시간 계산 및 출력 {%- endcomment -%}
-    <p class="page__meta">
-      <span class="page__meta-date">
-        <i class="far fa-calendar" aria-hidden="true"></i>
-        {{ post.date | date: "%Y-%m-%d" }}
-      </span>
-      <br />
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        {%- assign words = post.content | number_of_words -%} {%- assign minutes
-        = words | divided_by: 200 | ceil -%} {{ minutes }} minute read
-      </span>
-    </p>
-
-    {%- comment -%} 6) 요약(excerpt)이 있을 때만 출력 {%- endcomment -%} {%- if
-    post.excerpt -%}
-    <p class="archive__item-excerpt" itemprop="description">
-      {{ post.excerpt | markdownify | strip_html | truncate: 160 }}
-    </p>
+    {%- comment -%} 3) Grid 모드이고 teaser가 있으면 썸네일 출력 {%- endcomment -%}
+    {%- if include.type == "grid" and teaser -%}
+      <div class="archive__item-teaser">
+        <img src="{{ teaser | relative_url }}" alt="" />
+      </div>
     {%- endif -%}
+
+    {%- comment -%} 4) 제목(h2) + permalink {%- endcomment -%}
+    <div class="archive__item-body">
+      <h2 class="archive__item-title no_toc" itemprop="headline">
+        {%- if post.link -%}
+          <a href="{{ post.link }}">{{ title }}</a>
+          <a href="{{ post.url | relative_url }}" rel="permalink">
+            <i class="fas fa-link" aria-hidden="true" title="Permalink"></i>
+            <span class="sr-only">Permalink</span>
+          </a>
+        {%- else -%}
+          <a href="{{ post.url | relative_url }}" rel="permalink">{{ title }}</a>
+        {%- endif -%}
+      </h2>
+
+      {%- comment -%} 5) 날짜 + 읽기 시간 출력 {%- endcomment -%}
+      <p class="page__meta">
+        <span class="page__meta-date">
+          <i class="far fa-calendar" aria-hidden="true"></i>
+          {{ post.date | date: "%Y-%m-%d" }}
+        </span>
+        <br />
+        <span class="page__meta-readtime">
+          <i class="far fa-clock" aria-hidden="true"></i>
+          {%- assign words = post.content | number_of_words -%}
+          {%- assign minutes = words | divided_by: 200 | ceil -%}
+          {{ minutes }} minute read
+        </span>
+      </p>
+
+      {%- comment -%} 6) excerpt가 있을 때만 출력 {%- endcomment -%}
+      {%- if post.excerpt -%}
+        <p class="archive__item-excerpt" itemprop="description">
+          {{ post.excerpt | markdownify | strip_html | truncate: 160 }}
+        </p>
+      {%- endif -%}
+
+      {%- comment -%} 7) 카드 하단에 “카테고리 · 태그” 뱃지 출력 {%- endcomment -%}
+      <div class="archive__item-cats-tags">
+        {%- if post.categories -%}
+          <div class="archive__item-categories">
+            {%- for cat in post.categories -%}
+              <a
+                href="{{ '/categories/' | append: cat | append: '/' | relative_url }}"
+                class="archive__item-category"
+              >
+                {{ cat }}
+              </a>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- if post.tags -%}
+          <div class="archive__item-tags">
+            {%- for tg in post.tags -%}
+              <span class="archive__item-tag">{{ tg }}</span>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+    <!-- /.archive__item-body -->
+
   </article>
 </div>
+<!-- /.{include.type}__item -->

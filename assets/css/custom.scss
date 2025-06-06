@@ -1,277 +1,229 @@
 /* ========================================================================
-   custom.scss (Override 용)
+   custom.scss (Override 전용)
    ======================================================================== */
 
-/* ------------------------------------------------------------------------
-   0. (선택) 테마 전역 변수 재정의
-   ------------------------------------------------------------------------ */
-// 예시) 기본 gutter 값을 바꾸고 싶으면 아래와 같이 선언
-// $gutter: 1.5rem;
-// $muted-text-color: #666666;
+/* =====================================================================
+   [A] entries-grid: “큰 화면 5열 / 중간 3열 / 작은 화면 1열”
+   ===================================================================== */
+.entries-grid {
+  display: grid;
+  grid-gap: 1rem; // 카드 간격
+  margin: 0;
+  padding: 0;
+  list-style: none;
 
-/* ==========================================================================
-   1. ARCHIVE (Recent Posts) 오버라이드
-   • 파일 원본: _sass/minimal-mistakes/_archive.scss
-   • 데스크탑(large 이상)에서 사이드바 제외폭 축소(160px) & 5열 그리드 고정
-   ========================================================================== */
-.archive {
-  margin-top: 1em;
-  margin-bottom: 2em;
-
-  /* 데스크탑 이상에서 콘텐츠 폭을 넓히기 위해
-       기존 200px 대신 160px만 제외하도록 수정 */
+  /* 큰 화면(large) 이상에서 5열 고정 */
   @include breakpoint($large) {
-    float: inline-end;
-    width: calc(100% - 160px);
-    padding-inline-end: 160px;
-  }
-  @include breakpoint($x-large) {
-    width: calc(100% - 160px);
-    padding-inline-end: 160px;
+    /* minmax(240px, 1fr)로 최소 너비를 240px 보장, 화면 폭에 맞춰 자동으로 열 개수 조정 */
+    grid-template-columns: repeat(5, minmax(240px, 1fr));
   }
 
-  /* 데스크탑 이상에서 entries-grid를 5열 CSS Grid 로 전환 */
-  @include breakpoint($large) {
-    .entries-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      grid-gap: gutter(of 12);
-    }
-    .entries-grid .grid__item {
-      float: none;
-      width: auto;
-      margin: 0;
-    }
+  /* 중간 화면(medium) 이하에서 3열 고정 */
+  @include breakpoint($medium) {
+    grid-template-columns: repeat(3, minmax(240px, 1fr));
+  }
+
+  /* 작은 화면(small) 이하에서 1열 고정 */
+  @include breakpoint($small) {
+    grid-template-columns: repeat(1, minmax(240px, 1fr));
   }
 }
 
-/* Archive 내부 개별 포스트 카드(썸네일/제목/메타) */
-.archive__item-teaser {
-  @include breakpoint($small) {
-    max-height: 140px;
-    overflow: hidden;
+/* ----------------------------------------------------------------------------
+     [B] 각 카드(.grid__item) 내부: flex-column으로 세로 정렬
+     ---------------------------------------------------------------------------- */
+.entries-grid .grid__item {
+  display: flex;
+  flex-direction: column;
+  align-self: start;
+  width: 100%;
+}
 
-    img {
-      width: 100%;
-      object-fit: cover;
-    }
+/* =====================================================================
+     [C] 카드 전체(.archive__item) 스타일
+     ===================================================================== */
+.archive__item {
+  max-width: 240px; /* 카드 최대 너비(240px) 고정 */
+  width: 100%;
+  background: $background-color;
+  border-radius: $border-radius;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
+}
+
+/* =====================================================================
+     [D] 썸네일 (16:9 비율 컨테이너 + object-fit: contain)
+     ===================================================================== */
+.archive__item-teaser {
+  position: relative;
+  width: 100%;
+
+  /* 16:9 비율이 유지되도록 padding-top 설정 */
+  padding-top: 56.25%; /* (9/16)*100 = 56.25% */
+
+  overflow: hidden;
+  flex-shrink: 0;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* 이미지 원본 비율을 유지하며 가능한 한 컨테이너에 꽉 차게 표현 */
+    background-color: #f8f8f8; /* 컨테이너 배경색 (원본 비율보다 작을 때 남는 영역을 채워줌) */
+    transform: none; /* 이전의 translate 제거 */
+  }
+}
+
+/* =====================================================================
+     [E] 카드 본문 영역: 제목 / 메타 / 태그
+     ===================================================================== */
+.archive__item-body {
+  padding: 0.75rem 1rem 1.75rem; /* 아래쪽 뱃지 수용을 위해 충분한 여유 주기 */
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .archive__item-title {
-  margin-top: 0.2em;
-  margin-bottom: 0.1em;
-  font-size: 0.95rem;
-  line-height: 1.25;
+  font-size: 1rem;
+  line-height: 1.3;
+  margin: 0 0 0.4rem;
+
+  /* 제목이 너무 길면 두 줄까지 보이도록, 초과 시 ellipsis (…) 적용 */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 
 .page__meta {
-  font-size: 0.7rem;
-  line-height: 1.2;
-  margin: 0 0 0.05em;
+  font-size: 0.75rem;
   color: $muted-text-color;
-}
+  margin: 0 0 0.5rem;
+  line-height: 1.2;
 
-/* ------------------------------------------------------------------------
-     1-1. Recent Posts 카드에 Hover 빤짝 효과 추가
-     • Recent posts (entries-grid) 안의 각각 .archive__item에 반응형 hover 효과
-     ========================================================================== */
-.entries-grid {
-  .archive__item {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    /* 배경이 흰색이라면 살짝 그림자 추가 */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    border-radius: $border-radius;
-
-    &:hover {
-      transform: translateY(-3px) scale(1.01);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
+  i {
+    margin-right: 0.25em;
+    font-size: 0.8rem;
   }
 }
 
-/* ==========================================================================
-     2. SINGLE PAGE – Hero 이미지(페이지 상단 썸네일) 크기 조절
-     • 파일 원본: _sass/minimal-mistakes/_page.scss 또는 _sass/minimal-mistakes/_single.scss
-     ========================================================================== */
-.page__hero--overlay {
-  height: 200px !important; /* 원하는 높이(px)로 조절 */
-  background-size: contain !important; /* 비율 유지하면서 축소 */
-  background-position: center center;
+/* =====================================================================
+     [F] 카드 하단 “카테고리·태그” 뱃지
+     ===================================================================== */
+.archive__item-cats-tags {
+  margin-top: auto; /* flex-grow로 콘텐츠가 채워진 뒤, 맨 아래로 배지 고정 */
+  padding-top: 0.5rem;
 }
 
-/* ==========================================================================
-     3. SINGLE PAGE – Pagination (Previous / Next) 버튼 스타일
-     • 파일 원본 HTML: _includes/_layouts/single.html
-     ========================================================================== */
-.pagination {
+.archive__item-categories {
   display: flex;
-  justify-content: space-between;
-  margin: 2em 0;
+  flex-wrap: wrap;
+  margin-bottom: 0.3rem;
+}
 
-  .pagination--pager {
-    flex: 1;
-    text-align: center;
-    padding: 0.75em 1em;
-    border: 1px solid $border-color;
-    background: $background-color;
-    color: $text-color;
-    text-decoration: none;
-    font-weight: 500;
-    border-radius: $border-radius;
-    transition: background 0.2s ease, color 0.2s ease;
+.archive__item-category {
+  background: lighten($primary-color, 40%);
+  color: $primary-color;
+  font-size: 0.65rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  margin-right: 0.4rem;
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
 
-    &:hover {
-      background: $primary-color;
-      color: #fff;
-      text-decoration: none;
-    }
-
-    &.disabled {
-      cursor: not-allowed;
-      opacity: 0.5;
-      pointer-events: none;
-      background: $background-color; /* $muted-background-color 대신 $background-color 사용 */
-      color: $muted-text-color;
-    }
+  &:hover {
+    background: $primary-color;
+    color: #fff;
   }
 }
 
-/* ==========================================================================
-     4. SINGLE PAGE – “You May Also Enjoy” (관련 포스트) 카드 그리드 레이아웃
-     • 파일 원본 HTML: _includes/_layouts/single.html → .page__related / .grid__wrapper
-     ========================================================================== */
-.page__related {
-  margin-top: 3em;
-  margin-bottom: 3em;
+.archive__item-tags {
+  display: flex;
+  flex-wrap: wrap;
+}
 
-  .page__related-title {
-    font-size: 1.25rem;
-    margin-bottom: 1em;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: $muted-text-color;
-    font-weight: 600;
-  }
+.archive__item-tag {
+  background: #e0e0e0;
+  color: #555;
+  font-size: 0.65rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  margin-right: 0.4rem;
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  pointer-events: none; /* 클릭 차단 */
+  transition: background 0.2s ease;
 
-  /* 카드형 그리드 컨테이너 */
-  .grid__wrapper {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    grid-gap: gutter(of 12);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  /* 카드 하나(item) */
-  .grid__item {
-    margin: 0;
-    float: none;
-    width: auto;
-    padding: 0;
-  }
-
-  .archive__item {
-    position: relative;
-    background: $background-color;
-    border-radius: $border-radius;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-    &:hover {
-      transform: translateY(-3px) scale(1.01);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    /* 썸네일 */
-    .archive__item-teaser {
-      width: 100%;
-      border-radius: $border-radius $border-radius 0 0;
-      overflow: hidden;
-
-      img {
-        display: block;
-        width: 100%;
-        height: 120px; /* 카드 높이에 맞춘 썸네일 높이 */
-        object-fit: cover; /* 이미지 비율 유지하며 자르기 */
-      }
-    }
-
-    /* 제목+메타 영역 */
-    .archive__item-body {
-      padding: 0.75em 1em;
-    }
-
-    .archive__item-title {
-      font-size: 1rem;
-      margin: 0 0 0.5em;
-      line-height: 1.2;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap; /* 한 줄로 고정, 넘칠 시 “…” 처리 */
-    }
-
-    .page__meta {
-      font-size: 0.75rem;
-      color: $muted-text-color;
-      margin: 0;
-      line-height: 1.3;
-
-      i {
-        margin-right: 0.25em;
-        font-size: 0.8rem;
-      }
-    }
-
-    /* 카드 전체 클릭 영역 확대 */
-    a[rel="permalink"]::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-    }
-  }
-
-  /* “You May Also Enjoy” 썸네일 크기 조절(추가 요청) */
-  .archive__item-teaser {
-    img {
-      height: 50px; /* 120px → 80px 로 축소 */
-      object-fit: cover;
-    }
-  }
-
-  /* 모바일 반응형 보정 */
-  @include breakpoint($small) {
-    .grid__wrapper {
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      grid-gap: gutter(of 8);
-    }
-    .archive__item-teaser img {
-      height: 60px; /* 모바일에서는 80px → 60px 축소 */
-    }
-    .archive__item-title {
-      font-size: 0.9rem;
-    }
+  &:hover {
+    background: darken(#e0e0e0, 10%);
   }
 }
 
-/* ==========================================================================
-   NAVIGATION ── 3영역(flex) 배치 & 검색 아이콘 위치 조정
-   ========================================================================== */
+/* =====================================================================
+     [G] 반응형 보정
+     ===================================================================== */
+@include breakpoint($medium) {
+  .entries-grid {
+    grid-template-columns: repeat(3, minmax(240px, 1fr));
+    grid-gap: 0.8rem;
+  }
+}
 
-/* 1) nav 전체를 flex 컨테이너로 분리 */
+@include breakpoint($small) {
+  .entries-grid {
+    grid-template-columns: repeat(1, minmax(240px, 1fr));
+    grid-gap: 0.6rem;
+  }
+  .archive__item-body {
+    padding: 0.5rem 0.5rem 1.5rem;
+  }
+  .archive__item-title {
+    font-size: 0.95rem;
+    -webkit-line-clamp: 2;
+  }
+  .page__meta {
+    font-size: 0.7rem;
+  }
+  .archive__item-category,
+  .archive__item-tag {
+    font-size: 0.6rem;
+    padding: 0.2rem 0.4rem;
+  }
+}
+
+/* =====================================================================
+     [H] 카드 컨테이너(archive)에 오른쪽 여백 약간 추가
+     ===================================================================== */
+.archive {
+  padding-right: 1rem; /* 오른쪽 여백을 아주 조금 추가해서, 카드가 오른쪽 끝에 붙어 보이지 않도록 */
+}
+
+/* =====================================================================
+     NAVIGATION ── flex 배치 & 검색 아이콘 위치 조정
+     ===================================================================== */
 #site-nav.greedy-nav {
   display: flex;
-  align-items: center; /* 수직 중앙 정렬 */
-  justify-content: space-between; /* 왼쪽·가운데·오른쪽으로 나누기 */
-  padding: 0 1rem; /* 좌우 여백 (필요시 조정) */
-  background: $background-color; /* 테마 배경색 */
-  z-index: 999; /* 상위 레이어 */
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  background: $background-color;
+  z-index: 999;
 }
 
-/* 2) nav-left / nav-center / nav-right 모두 flex 컨테이너 */
 .greedy-nav .nav-left,
 .greedy-nav .nav-center,
 .greedy-nav .nav-right {
@@ -279,21 +231,16 @@
   align-items: center;
 }
 
-/* 3) nav-left: “사이트 제목 → 돋보기” */
 .greedy-nav .nav-left {
-  order: 1; /* 왼쪽 영역 */
+  order: 1;
 }
-
-/* (3-a) site-title 오른쪽에 간격 주기 (선택) */
 .greedy-nav .nav-left .site-title {
-  margin-right: 0.5rem; /* 제목과 돋보기 사이 간격 */
+  margin-right: 0.5rem;
   font-weight: bold;
   text-decoration: none;
   color: inherit;
-  font-size: 1.125rem; /* 필요시 조정 */
+  font-size: 1.125rem;
 }
-
-/* (3-b) 돋보기 아이콘 스타일 및 여백 */
 .greedy-nav .nav-left .search__toggle.left-search {
   font-size: 1.2rem;
   background: none;
@@ -301,18 +248,15 @@
   color: inherit;
   cursor: pointer;
   align-self: center;
-
   display: flex;
   align-items: center;
-
-  margin-left: 0; /* 제목 우측 바로 붙이려면 0 사용 */
-  margin-right: 0.5rem; /* 필요시 아이콘 우측 여백 (선택) */
+  margin-left: 0;
+  margin-right: 0.5rem;
 }
 
-/* 4) nav-center: “Categories / Tags” 중앙 정렬 */
 .greedy-nav .nav-center {
-  order: 2; /* 가운데 영역 */
-  margin: 0 auto; /* 좌우 자동 여백으로 화면 정가운데 */
+  order: 2;
+  margin: 0 auto;
 }
 .greedy-nav .nav-center .masthead__menu {
   display: flex;
@@ -321,7 +265,7 @@
   margin: 0;
 }
 .greedy-nav .nav-center .masthead__menu-item {
-  margin: 0 1rem; /* 메뉴 간격 */
+  margin: 0 1rem;
 }
 .greedy-nav .nav-center .masthead__menu-item a {
   text-decoration: none;
@@ -333,9 +277,8 @@
   color: $primary-color;
 }
 
-/* 5) nav-right: “About” + 햄버거 토글 */
 .greedy-nav .nav-right {
-  order: 3; /* 오른쪽 영역 */
+  order: 3;
 }
 .greedy-nav .nav-right .masthead__menu {
   display: flex;
@@ -344,7 +287,7 @@
   margin: 0;
 }
 .greedy-nav .nav-right .masthead__menu-item {
-  margin-left: 1rem; /* 메뉴 간격 */
+  margin-left: 1rem;
 }
 .greedy-nav .nav-right .masthead__menu-item a {
   text-decoration: none;
@@ -353,14 +296,13 @@
   transition: color 0.2s ease;
 }
 .greedy-nav .nav-right .greedy-nav__toggle {
-  margin-left: 1rem; /* 햄버거 토글 간격 */
+  margin-left: 1rem;
   background: none;
   border: none;
   cursor: pointer;
   outline: none;
 }
 
-/* 6) 모바일/태블릿 화면에서 nav-center 항목 간격 축소 (선택) */
 @include breakpoint($small) {
   .greedy-nav .nav-center .masthead__menu-item {
     margin: 0 0.5rem;
