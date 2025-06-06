@@ -1,46 +1,161 @@
-{% capture logo_path %}{{ site.logo }}{% endcapture %}
+{%- capture logo_path -%}{{ site.logo }}{%- endcapture -%}
 
 <div class="masthead">
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        {% unless logo_path == empty %}
-          <a class="site-logo" href="{{ '/' | relative_url }}"><img src="{{ logo_path | relative_url }}" alt="{{ site.masthead_title | default: site.title }}"></a>
-        {% endunless %}
+        {%- comment -%}
+        ─────────────────────────────────────────────────────────────────────────────
+        1) 왼쪽(nav-left): • 로고(logo_path) → 사이트 제목(site-title) → 검색
+        아이콘(search__toggle)
+        ─────────────────────────────────────────────────────────────────────────────
+        {%- endcomment -%}
+        <div class="nav-left">
+          {%- unless logo_path == empty -%}
+          <a class="site-logo" href="{{ '/' | relative_url }}">
+            <img
+              src="{{ logo_path | relative_url }}"
+              alt="{{ site.masthead_title | default: site.title }}"
+            />
+          </a>
+          {%- endunless -%}
 
-        {%- if site.search == true -%}
-        <!-- 검색 아이콘을 로고 옆으로 이동 -->
-        <button class="search__toggle left-search" type="button">
-          <span class="visually-hidden">{{ site.data.ui-text[site.locale].search_label | default: "Toggle search" }}</span>
-          <i class="fas fa-search"></i>
-        </button>
-        {%- endif -%}
+          <a class="site-title" href="{{ '/' | relative_url }}">
+            {{ site.masthead_title | default: site.title }} {%- if site.subtitle
+            -%}
+            <span class="site-subtitle">{{ site.subtitle }}</span>
+            {%- endif -%}
+          </a>
 
-        <!-- 사이트 제목 -->
-        <a class="site-title" href="{{ '/' | relative_url }}">
-          {{ site.masthead_title | default: site.title }}
-          {% if site.subtitle %}<span class="site-subtitle">{{ site.subtitle }}</span>{% endif %}
-        </a>
+          {%- if site.search == true -%}
+          <button class="search__toggle left-search" type="button">
+            <span class="visually-hidden">
+              {{ site.data.ui-text[site.locale].search_label | default: "Toggle
+              search" }}
+            </span>
+            <i class="fas fa-search"></i>
+          </button>
+          {%- endif -%}
+        </div>
 
-        <ul class="visible-links">
-          {%- for link in site.data.navigation.main -%}
+        {%- comment -%}
+        ─────────────────────────────────────────────────────────────────────────────
+        2) 가운데(nav-center): • site.data.navigation.main 중에서 title이
+        “Categories” 또는 “Tags”인 링크만
+        ─────────────────────────────────────────────────────────────────────────────
+        {%- endcomment -%}
+        <div class="nav-center">
+          <ul class="masthead__menu">
+            {%- for link in site.data.navigation.main -%} {%- if link.title ==
+            "Categories" or link.title == "Tags" -%}
             <li class="masthead__menu-item">
               <a
                 href="{{ link.url | relative_url }}"
-                {% if link.description %} title="{{ link.description }}"{% endif %}
-                {% if link.target %} target="{{ link.target }}"{% endif %}
-              >{{ link.title }}</a>
+                {%-
+                if
+                link.description
+                %}
+                title="{{ link.description }}"
+                {%-
+                endif
+                -%}
+                {%-
+                if
+                link.target
+                %}
+                target="{{ link.target }}"
+                {%-
+                endif
+                -%}
+              >
+                {{ link.title }}
+              </a>
             </li>
-          {%- endfor -%}
+            {%- endif -%} {%- endfor -%}
+          </ul>
+        </div>
+
+        {%- comment -%}
+        ─────────────────────────────────────────────────────────────────────────────
+        3) 오른쪽(nav-right): • site.data.navigation.main 중에서 title이
+        “About”인 링크 • 그 뒤에 “햄버거 토글 버튼” (모바일/태블릿에서 나머지
+        링크 숨김/펼침)
+        ─────────────────────────────────────────────────────────────────────────────
+        {%- endcomment -%}
+        <div class="nav-right">
+          <ul class="masthead__menu">
+            {%- for link in site.data.navigation.main -%} {%- if link.title ==
+            "About" -%}
+            <li class="masthead__menu-item">
+              <a
+                href="{{ link.url | relative_url }}"
+                {%-
+                if
+                link.description
+                %}
+                title="{{ link.description }}"
+                {%-
+                endif
+                -%}
+                {%-
+                if
+                link.target
+                %}
+                target="{{ link.target }}"
+                {%-
+                endif
+                -%}
+              >
+                {{ link.title }}
+              </a>
+            </li>
+            {%- endif -%} {%- endfor -%}
+            <!-- 모바일/태블릿에서 숨겨진 나머지 링크 토글용 햄버거 버튼 -->
+            <button class="greedy-nav__toggle hidden" type="button">
+              <span class="visually-hidden">
+                {{ site.data.ui-text[site.locale].menu_label | default: "Toggle
+                menu" }}
+              </span>
+              <div class="navicon"></div>
+            </button>
+          </ul>
+        </div>
+
+        {%- comment -%}
+        ─────────────────────────────────────────────────────────────────────────────
+        4) hidden-links: • nav-left/nav-center/nav-right에 포함되지 않은 “그 외
+        모든 링크들” (예: 만약 navigation.yml에 Home, Contact 등 다른 항목이
+        있다면 여기에 들어감)
+        ─────────────────────────────────────────────────────────────────────────────
+        {%- endcomment -%}
+        <ul class="hidden-links hidden">
+          {%- for link in site.data.navigation.main -%} {%- unless link.title ==
+          "Categories" or link.title == "Tags" or link.title == "About" -%}
+          <li class="masthead__menu-item">
+            <a
+              href="{{ link.url | relative_url }}"
+              {%-
+              if
+              link.description
+              %}
+              title="{{ link.description }}"
+              {%-
+              endif
+              -%}
+              {%-
+              if
+              link.target
+              %}
+              target="{{ link.target }}"
+              {%-
+              endif
+              -%}
+            >
+              {{ link.title }}
+            </a>
+          </li>
+          {%- endunless -%} {%- endfor -%}
         </ul>
-
-        <!-- 햄버거 메뉴 버튼 -->
-        <button class="greedy-nav__toggle hidden" type="button">
-          <span class="visually-hidden">{{ site.data.ui-text[site.locale].menu_label | default: "Toggle menu" }}</span>
-          <div class="navicon"></div>
-        </button>
-
-        <ul class="hidden-links hidden"></ul>
       </nav>
     </div>
   </div>

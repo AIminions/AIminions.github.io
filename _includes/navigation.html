@@ -1,0 +1,57 @@
+<nav id="site-nav" class="greedy-nav">
+  <!-- 1) 왼쪽(nav-left): 사이트 제목 + 검색 아이콘 -->
+  <div class="nav-left">
+-   <button class="search__toggle left-search" type="button">
+-     <span class="visually-hidden">Toggle search</span>
+-     <i class="fas fa-search"></i>
+-   </button>
+    <a class="site-title" href="{{ "/" | relative_url }}">
+      {{ site.title }}
+    </a>
++   <button class="search__toggle left-search" type="button">
++     <span class="visually-hidden">Toggle search</span>
++     <i class="fas fa-search"></i>
++   </button>
+  </div>
+
+  <!-- 2) 가운데(nav-center): Categories / Tags -->
+  <div class="nav-center">
+    <ul class="masthead__menu">
+      {%- for link in site.data.navigation -%}
+        {%- if link.title == "Categories" or link.title == "Tags" -%}
+          <li class="masthead__menu-item">
+            <a href="{{ link.url | relative_url }}">{{ link.title }}</a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+
+  <!-- 3) 오른쪽(nav-right): About + 햄버거 토글 -->
+  <div class="nav-right">
+    <ul class="masthead__menu">
+      {%- for link in site.data.navigation -%}
+        {%- if link.title == "About" -%}
+          <li class="masthead__menu-item">
+            <a href="{{ link.url | relative_url }}">{{ link.title }}</a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+      <button class="greedy-nav__toggle hidden" type="button">
+        <span class="visually-hidden">Toggle menu</span>
+        <div class="navicon"></div>
+      </button>
+    </ul>
+  </div>
+
+  <!-- 4) hidden-links: 나머지 메뉴들 -->
+  <ul class="hidden-links hidden">
+    {%- for link in site.data.navigation -%}
+      {%- unless link.title == "Categories" or link.title == "Tags" or link.title == "About" -%}
+        <li class="masthead__menu-item">
+          <a href="{{ link.url | relative_url }}">{{ link.title }}</a>
+        </li>
+      {%- endunless -%}
+    {%- endfor -%}
+  </ul>
+</nav>

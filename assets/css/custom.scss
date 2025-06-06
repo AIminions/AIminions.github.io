@@ -256,3 +256,114 @@
     }
   }
 }
+
+/* ==========================================================================
+   NAVIGATION ── 3영역(flex) 배치 & 검색 아이콘 위치 조정
+   ========================================================================== */
+
+/* 1) nav 전체를 flex 컨테이너로 분리 */
+#site-nav.greedy-nav {
+  display: flex;
+  align-items: center; /* 수직 중앙 정렬 */
+  justify-content: space-between; /* 왼쪽·가운데·오른쪽으로 나누기 */
+  padding: 0 1rem; /* 좌우 여백 (필요시 조정) */
+  background: $background-color; /* 테마 배경색 */
+  z-index: 999; /* 상위 레이어 */
+}
+
+/* 2) nav-left / nav-center / nav-right 모두 flex 컨테이너 */
+.greedy-nav .nav-left,
+.greedy-nav .nav-center,
+.greedy-nav .nav-right {
+  display: flex;
+  align-items: center;
+}
+
+/* 3) nav-left: “사이트 제목 → 돋보기” */
+.greedy-nav .nav-left {
+  order: 1; /* 왼쪽 영역 */
+}
+
+/* (3-a) site-title 오른쪽에 간격 주기 (선택) */
+.greedy-nav .nav-left .site-title {
+  margin-right: 0.5rem; /* 제목과 돋보기 사이 간격 */
+  font-weight: bold;
+  text-decoration: none;
+  color: inherit;
+  font-size: 1.125rem; /* 필요시 조정 */
+}
+
+/* (3-b) 돋보기 아이콘 스타일 및 여백 */
+.greedy-nav .nav-left .search__toggle.left-search {
+  font-size: 1.2rem;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  align-self: center;
+
+  display: flex;
+  align-items: center;
+
+  margin-left: 0; /* 제목 우측 바로 붙이려면 0 사용 */
+  margin-right: 0.5rem; /* 필요시 아이콘 우측 여백 (선택) */
+}
+
+/* 4) nav-center: “Categories / Tags” 중앙 정렬 */
+.greedy-nav .nav-center {
+  order: 2; /* 가운데 영역 */
+  margin: 0 auto; /* 좌우 자동 여백으로 화면 정가운데 */
+}
+.greedy-nav .nav-center .masthead__menu {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.greedy-nav .nav-center .masthead__menu-item {
+  margin: 0 1rem; /* 메뉴 간격 */
+}
+.greedy-nav .nav-center .masthead__menu-item a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+.greedy-nav .nav-center .masthead__menu-item a:hover {
+  color: $primary-color;
+}
+
+/* 5) nav-right: “About” + 햄버거 토글 */
+.greedy-nav .nav-right {
+  order: 3; /* 오른쪽 영역 */
+}
+.greedy-nav .nav-right .masthead__menu {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.greedy-nav .nav-right .masthead__menu-item {
+  margin-left: 1rem; /* 메뉴 간격 */
+}
+.greedy-nav .nav-right .masthead__menu-item a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+.greedy-nav .nav-right .greedy-nav__toggle {
+  margin-left: 1rem; /* 햄버거 토글 간격 */
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+/* 6) 모바일/태블릿 화면에서 nav-center 항목 간격 축소 (선택) */
+@include breakpoint($small) {
+  .greedy-nav .nav-center .masthead__menu-item {
+    margin: 0 0.5rem;
+    font-size: 0.9rem;
+  }
+}
