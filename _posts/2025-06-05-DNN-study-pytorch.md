@@ -7,7 +7,7 @@ tags: [딥러닝]
 header:
   overlay_image: /assets/images/pytorch.png
   teaser: /assets/images/pytorch.png
-  caption: "AI school 로고"
+  caption: "pytorch"
 ---
 
 <style>
