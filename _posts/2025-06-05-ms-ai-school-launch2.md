@@ -2,8 +2,8 @@
 layout: single
 title: "딥러닝, 파이토치 1편"
 date: 2025-06-05
-categories: [프로젝트]
-tags: [딥러닝, MS AI School]
+categories: [파이토치]
+tags: [딥러닝, .empty]
 header:
   overlay_image: /assets/images/aischool.jpg
   teaser: /assets/images/aischool.jpg
