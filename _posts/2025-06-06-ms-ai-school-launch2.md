@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "딥러닝, 파이토치 텐서 2편"
-date: 2025-06-05
+date: 2025-06-06
 categories: [파이토치]
 tags: [딥러닝, .tensor, 텐서]
 header:
