@@ -410,8 +410,43 @@ hr,
   opacity: 1 !important;
 }
 
-/* 소셜 공유버튼(Share on) 글자 색상 하얗게 */
-.page__share a,
-.social-icons a {
+/* 소셜 공유버튼(Share on)만 글자색 하얗게, 배경색 유지 */
+.page__share a {
   color: #fff !important;
+}
+
+/* ===============================
+   푸터 팔로우/소셜 링크: 아이콘은 원래대로, 글자만 검정
+   =============================== */
+.page__footer-follow {
+  color: inherit !important;
+}
+.page__footer-follow *:not(i):not(svg):not(.fa) {
+  color: #111 !important;
+  font-weight: 700;
+}
+
+/* ===============================
+   사이드 프로필(Author Profile) 글자 스타일 수정
+   =============================== */
+.author__content,
+.author__name,
+.author__bio,
+.author__urls-wrapper,
+.author__urls,
+.author__urls li,
+.author__bio strong {
+  color: #222 !important;
+  opacity: 1 !important;
+}
+.author__bio {
+  font-size: 1.08em !important;
+}
+.author__name {
+  font-size: 1.4em !important;
+  font-weight: 700;
+}
+.author__avatar img {
+  border: 3px solid #ddd;
+  border-radius: 50%;
 }
