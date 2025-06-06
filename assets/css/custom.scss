@@ -7,31 +7,28 @@
    ===================================================================== */
 .entries-grid {
   display: grid;
-  grid-gap: 1rem; // 카드 간격
+  grid-gap: 1rem; // 카드 간격 통일
   margin: 0;
   padding: 0;
   list-style: none;
 
-  /* 큰 화면(large) 이상에서 5열 고정 */
+  /* 1) 큰 화면(large 이상)에서 5열, 최소 너비 240px 보장 */
   @include breakpoint($large) {
-    /* minmax(240px, 1fr)로 최소 너비를 240px 보장, 화면 폭에 맞춰 자동으로 열 개수 조정 */
     grid-template-columns: repeat(5, minmax(240px, 1fr));
   }
-
-  /* 중간 화면(medium) 이하에서 3열 고정 */
+  /* 2) 중간 화면(medium 이하)에서 3열 */
   @include breakpoint($medium) {
     grid-template-columns: repeat(3, minmax(240px, 1fr));
   }
-
-  /* 작은 화면(small) 이하에서 1열 고정 */
+  /* 3) 작은 화면(small 이하)에서 1열 */
   @include breakpoint($small) {
     grid-template-columns: repeat(1, minmax(240px, 1fr));
   }
 }
 
 /* ----------------------------------------------------------------------------
-     [B] 각 카드(.grid__item) 내부: flex-column으로 세로 정렬
-     ---------------------------------------------------------------------------- */
+       [B] 각 카드(.grid__item) 내부: 세로 정렬
+       ---------------------------------------------------------------------------- */
 .entries-grid .grid__item {
   display: flex;
   flex-direction: column;
@@ -40,10 +37,10 @@
 }
 
 /* =====================================================================
-     [C] 카드 전체(.archive__item) 스타일
-     ===================================================================== */
+       [C] 카드 전체(.archive__item) 스타일
+       ===================================================================== */
 .archive__item {
-  max-width: 240px; /* 카드 최대 너비(240px) 고정 */
+  max-width: 240px; /* 카드 최대 너비 고정 */
   width: 100%;
   background: $background-color;
   border-radius: $border-radius;
@@ -61,14 +58,14 @@
 }
 
 /* =====================================================================
-     [D] 썸네일 (16:9 비율 컨테이너 + object-fit: contain)
-     ===================================================================== */
+       [D] 썸네일 (16:9 비율 고정 + object-fit: cover)
+       ===================================================================== */
 .archive__item-teaser {
   position: relative;
   width: 100%;
 
-  /* 16:9 비율이 유지되도록 padding-top 설정 */
-  padding-top: 56.25%; /* (9/16)*100 = 56.25% */
+  /* 16:9 비율을 유지하기 위해 padding-top 사용 */
+  padding-top: 56.25%; /* 9/16 = 0.5625 × 100% */
 
   overflow: hidden;
   flex-shrink: 0;
@@ -79,17 +76,16 @@
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain; /* 이미지 원본 비율을 유지하며 가능한 한 컨테이너에 꽉 차게 표현 */
-    background-color: #f8f8f8; /* 컨테이너 배경색 (원본 비율보다 작을 때 남는 영역을 채워줌) */
-    transform: none; /* 이전의 translate 제거 */
+    object-fit: cover; /* 컨테이너에 가로×세로 꽉 채우고, 중앙 위주로 크롭 */
+    object-position: center;
   }
 }
 
 /* =====================================================================
-     [E] 카드 본문 영역: 제목 / 메타 / 태그
-     ===================================================================== */
+       [E] 카드 본문(.archive__item-body): 제목 / 메타 / 태그
+       ===================================================================== */
 .archive__item-body {
-  padding: 0.75rem 1rem 1.75rem; /* 아래쪽 뱃지 수용을 위해 충분한 여유 주기 */
+  padding: 0.75rem 1rem 1.75rem; /* 아래쪽 태그 공간 여유 */
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -100,7 +96,7 @@
   line-height: 1.3;
   margin: 0 0 0.4rem;
 
-  /* 제목이 너무 길면 두 줄까지 보이도록, 초과 시 ellipsis (…) 적용 */
+  /* 너무 긴 제목은 최대 2줄까지 표시, 초과 시 “…” */
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -120,10 +116,10 @@
 }
 
 /* =====================================================================
-     [F] 카드 하단 “카테고리·태그” 뱃지
-     ===================================================================== */
+       [F] 카드 하단: 카테고리 · 태그 뱃지
+       ===================================================================== */
 .archive__item-cats-tags {
-  margin-top: auto; /* flex-grow로 콘텐츠가 채워진 뒤, 맨 아래로 배지 고정 */
+  margin-top: auto; /* flex-grow 후 맨 아래로 밀어내기 */
   padding-top: 0.5rem;
 }
 
@@ -143,8 +139,12 @@
   margin-bottom: 0.25rem;
   white-space: nowrap;
   text-decoration: none;
-  transition: background 0.2s ease, color 0.2s ease;
 
+  /* 클릭 무효화 → 404 방지 */
+  pointer-events: none;
+  cursor: default;
+
+  transition: background 0.2s ease, color 0.2s ease;
   &:hover {
     background: $primary-color;
     color: #fff;
@@ -165,17 +165,20 @@
   margin-right: 0.4rem;
   margin-bottom: 0.25rem;
   white-space: nowrap;
-  pointer-events: none; /* 클릭 차단 */
-  transition: background 0.2s ease;
 
+  /* 클릭 무효화 → 404 방지 */
+  pointer-events: none;
+  cursor: default;
+
+  transition: background 0.2s ease;
   &:hover {
     background: darken(#e0e0e0, 10%);
   }
 }
 
 /* =====================================================================
-     [G] 반응형 보정
-     ===================================================================== */
+       [G] 반응형 보정 (Medium / Small 이하)
+       ===================================================================== */
 @include breakpoint($medium) {
   .entries-grid {
     grid-template-columns: repeat(3, minmax(240px, 1fr));
@@ -206,15 +209,15 @@
 }
 
 /* =====================================================================
-     [H] 카드 컨테이너(archive)에 오른쪽 여백 약간 추가
-     ===================================================================== */
+       [H] 카드 컨테이너(.archive)에 오른쪽 여백 약간 추가
+       ===================================================================== */
 .archive {
-  padding-right: 1rem; /* 오른쪽 여백을 아주 조금 추가해서, 카드가 오른쪽 끝에 붙어 보이지 않도록 */
+  padding-right: 1rem; /* 카드가 오른쪽 끝에 딱 붙어있지 않도록 소폭 여유 */
 }
 
 /* =====================================================================
-     NAVIGATION ── flex 배치 & 검색 아이콘 위치 조정
-     ===================================================================== */
+       NAVIGATION ── flex 배치 & 검색 아이콘 정렬
+       ===================================================================== */
 #site-nav.greedy-nav {
   display: flex;
   align-items: center;
