@@ -460,50 +460,55 @@ hr,
 .highlight .kr,
 .highlight .kn {
   color: #0550ae !important;
-  font-weight: 600;
+  font-weight: 700 !important;
 }
 /* 함수명 */
 .highlight .nf {
   color: #8250df !important;
-  font-weight: 600;
+  font-weight: 700 !important;
 }
 /* 변수/인자명 */
 .highlight .n,
 .highlight .na,
 .highlight .nb {
   color: #24292f !important;
+  font-weight: 700 !important;
 }
 /* 문자열 */
 .highlight .s,
 .highlight .s1,
 .highlight .s2 {
   color: #0a3069 !important;
+  font-weight: 700 !important;
 }
-/* f-string {name} */
+/* f-string {name}, 변수 이름 */
 .highlight .si,
 .highlight .nv {
   color: #116329 !important;
+  font-weight: 700 !important;
 }
 /* 숫자 */
 .highlight .m,
 .highlight .mi,
 .highlight .mf {
   color: #0550ae !important;
+  font-weight: 700 !important;
 }
-/* 괄호, 콜론, 쉼표 등 */
+/* 괄호, 콜론, 연산자 등 */
 .highlight .p,
 .highlight .o,
 .highlight .p1,
 .highlight .p2 {
-  color: #57606a !important;
-  font-weight: normal;
+  color: #333b48 !important;
+  font-weight: 700 !important;
 }
 /* 주석 */
 .highlight .c,
 .highlight .cm,
 .highlight .c1 {
   color: #6e7781 !important;
-  font-style: italic;
+  font-style: italic !important;
+  font-weight: 400 !important;
 }
 /* 에러 */
 .highlight .err {
