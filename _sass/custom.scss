@@ -412,3 +412,12 @@ a:visited {
 .archive__item-title a:focus {
   text-decoration: underline !important; /* (선택) 마우스 올릴 때만 밑줄 */
 }
+
+hr,
+.hr,
+.page__hr {
+  border: none;
+  border-top: 3px solid #333; /* 굵기(3px), 색(#333=진회색) 조절 */
+  margin: 2em 0;
+  opacity: 1 !important; /* 투명도 해제 */
+}
