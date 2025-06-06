@@ -88,7 +88,7 @@ torch.tensor()는 항상 CPU에 텐서를 생성합니다. to(device)를 해줘�
 
 torch.tensor()는 항상 복사가 발생하기 때문에, 큰 배열을 반복해서 처리할 경우 성능 병목의 원인이 됩니다.
 
-이럴 땐 `as_tensor()`나 `from_numpy()`를 고려해야 함.
+이럴 땐 `as_tensor()`나 `from_numpy()`를 고려해야 합니다.
 
 ---
 
