@@ -27,8 +27,8 @@
 }
 
 /* ----------------------------------------------------------------------------
-         [B] 각 카드(.grid__item) 내부: 세로 정렬
-         ---------------------------------------------------------------------------- */
+     [B] 각 카드(.grid__item) 내부: 세로 정렬
+     ---------------------------------------------------------------------------- */
 .entries-grid .grid__item {
   display: flex;
   flex-direction: column;
@@ -37,78 +37,67 @@
 }
 
 /* =====================================================================
-         [C] 카드 전체(.archive__item) 스타일
-         ===================================================================== */
-.archive__item {
-  max-width: 240px; /* 카드 최대 너비 고정 */
+     [C] 메인페이지 카드(.entries-grid > .archive__item)만 흰색 배경, 부드러운 그림자
+     ===================================================================== */
+.entries-grid .archive__item {
+  max-width: 240px;
   width: 100%;
-  background: $background-color;
-  border-radius: $border-radius;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  background: #fff !important;
+  border-radius: 1rem !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06) !important;
   overflow: hidden;
-
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-
+  transition: transform 0.2s, box-shadow 0.2s;
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   }
 }
 
 /* =====================================================================
-         [D] 썸네일 (16:9 비율 고정 + object-fit: cover)
-         ===================================================================== */
+     [D] 썸네일 (16:9 비율 고정 + object-fit: cover)
+     ===================================================================== */
 .archive__item-teaser {
   position: relative;
   width: 100%;
-
-  /* 16:9 비율을 유지하기 위해 padding-top 사용 */
   padding-top: 45%; /* 9/16 = 0.5625 × 100% */
-
   overflow: hidden;
   flex-shrink: 0;
-
   img {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* 컨테이너에 가로×세로 꽉 채우고, 중앙 위주로 크롭 */
+    object-fit: cover;
     object-position: center;
   }
 }
 
 /* =====================================================================
-         [E] 카드 본문(.archive__item-body): 제목 / 메타 / 태그
-         ===================================================================== */
+     [E] 카드 본문(.archive__item-body): 제목 / 메타 / 태그
+     ===================================================================== */
 .archive__item-body {
-  padding: 0.75rem 1rem 1.75rem; /* 아래쪽 태그 공간 여유 */
+  padding: 0.75rem 1rem 1.75rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
-
 .archive__item-title {
   font-size: 1rem;
   line-height: 1.3;
   margin: 0 0 0.4rem;
-
-  /* 너무 긴 제목은 최대 2줄까지 표시, 초과 시 “…” */
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
 }
-
 .page__meta {
   font-size: 0.75rem;
   color: $muted-text-color;
   margin: 0 0 0.5rem;
   line-height: 1.2;
-
   i {
     margin-right: 0.25em;
     font-size: 0.8rem;
@@ -116,76 +105,67 @@
 }
 
 /* =====================================================================
-         [F] 카드 하단: 카테고리 · 태그 뱃지
-         ===================================================================== */
-.archive__item-cats-tags {
-  margin-top: auto; /* flex-grow 후 맨 아래로 밀어내기 */
+     [F] 메인 카드 하단: 카테고리 · 태그 뱃지 색상 (entries-grid만)
+     ===================================================================== */
+.entries-grid .archive__item-cats-tags {
+  margin-top: auto;
   padding-top: 0.5rem;
 }
-
-.archive__item-categories {
+.entries-grid .archive__item-categories {
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 0.3rem;
 }
-
-.archive__item-category {
-  background: lighten($primary-color, 40%);
-  color: $primary-color;
+.entries-grid .archive__item-category {
+  background: #e3f2fd !important; /* 밝은 파랑 */
+  color: #1976d2 !important; /* 진한 파랑 */
   font-size: 0.65rem;
+  font-weight: 500;
   padding: 0.2rem 0.5rem;
   border-radius: 0.25rem;
   margin-right: 0.4rem;
   margin-bottom: 0.25rem;
   white-space: nowrap;
   text-decoration: none;
-
-  /* 클릭 무효화 → 404 방지 */
   pointer-events: none;
   cursor: default;
-
-  transition: background 0.2s ease, color 0.2s ease;
-  &:hover {
-    background: $primary-color;
-    color: #fff;
-  }
+  transition: background 0.2s, color 0.2s;
 }
-
-.archive__item-tags {
+.entries-grid .archive__item-category:hover {
+  background: #1976d2 !important;
+  color: #fff !important;
+}
+.entries-grid .archive__item-tags {
   display: flex;
   flex-wrap: wrap;
 }
-
-.archive__item-tag {
-  background: #e0e0e0;
-  color: #555;
+.entries-grid .archive__item-tag {
+  background: #f3f3f3 !important;
+  color: #505050 !important;
   font-size: 0.65rem;
+  font-weight: 400;
   padding: 0.2rem 0.5rem;
   border-radius: 0.25rem;
   margin-right: 0.4rem;
   margin-bottom: 0.25rem;
   white-space: nowrap;
-
-  /* 클릭 무효화 → 404 방지 */
   pointer-events: none;
   cursor: default;
-
-  transition: background 0.2s ease;
-  &:hover {
-    background: darken(#e0e0e0, 10%);
-  }
+  transition: background 0.2s;
+}
+.entries-grid .archive__item-tag:hover {
+  background: #e0e0e0 !important;
 }
 
 /* =====================================================================
-         [G] 반응형 보정 (Medium / Small 이하)
-         ===================================================================== */
+     [G] 반응형 보정 (Medium / Small 이하)
+     ===================================================================== */
 @include breakpoint($medium) {
   .entries-grid {
     grid-template-columns: repeat(3, minmax(240px, 1fr));
     grid-gap: 0.8rem;
   }
 }
-
 @include breakpoint($small) {
   .entries-grid {
     grid-template-columns: repeat(1, minmax(240px, 1fr));
@@ -201,23 +181,23 @@
   .page__meta {
     font-size: 0.7rem;
   }
-  .archive__item-category,
-  .archive__item-tag {
+  .entries-grid .archive__item-category,
+  .entries-grid .archive__item-tag {
     font-size: 0.6rem;
     padding: 0.2rem 0.4rem;
   }
 }
 
 /* =====================================================================
-         [H] 카드 컨테이너(.archive)에 오른쪽 여백 약간 추가
-         ===================================================================== */
+     [H] 카드 컨테이너(.archive)에 오른쪽 여백 약간 추가
+     ===================================================================== */
 .archive {
-  padding-right: 1rem; /* 카드가 오른쪽 끝에 딱 붙어있지 않도록 소폭 여유 */
+  padding-right: 1rem;
 }
 
 /* =====================================================================
-         NAVIGATION ── flex 배치 & 검색 아이콘 정렬
-         ===================================================================== */
+     NAVIGATION ── flex 배치 & 검색 아이콘 정렬
+     ===================================================================== */
 #site-nav.greedy-nav {
   display: flex;
   align-items: center;
@@ -226,14 +206,12 @@
   background: $background-color;
   z-index: 999;
 }
-
 .greedy-nav .nav-left,
 .greedy-nav .nav-center,
 .greedy-nav .nav-right {
   display: flex;
   align-items: center;
 }
-
 .greedy-nav .nav-left {
   order: 1;
 }
@@ -256,7 +234,6 @@
   margin-left: 0;
   margin-right: 0.5rem;
 }
-
 .greedy-nav .nav-center {
   order: 2;
   margin: 0 auto;
@@ -279,7 +256,6 @@
 .greedy-nav .nav-center .masthead__menu-item a:hover {
   color: $primary-color;
 }
-
 .greedy-nav .nav-right {
   order: 3;
 }
@@ -305,10 +281,105 @@
   cursor: pointer;
   outline: none;
 }
-
 @include breakpoint($small) {
   .greedy-nav .nav-center .masthead__menu-item {
     margin: 0 0.5rem;
     font-size: 0.9rem;
   }
+}
+
+/* =====================================================================
+     "You may also enjoy" 카드 그리드 오버라이드 (아래 코드는 그대로 유지!)
+     ===================================================================== */
+.page__related .grid__wrapper {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(240px, 1fr));
+  grid-gap: 1.5rem;
+  margin-top: 1rem;
+}
+@media (max-width: 1000px) {
+  .page__related .grid__wrapper {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  .page__related .grid__wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+.page__related .grid__item {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.page__related .archive__item {
+  max-width: 100%;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.page__related .archive__item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+.page__related .archive__item-teaser {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.page__related .archive__item-teaser img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.page__related .archive__item-body {
+  padding: 0.8rem 1rem 1.2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.page__related .archive__item-title {
+  font-size: 1rem;
+  line-height: 1.3;
+  margin: 0 0 0.35rem 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.page__related .page__meta {
+  font-size: 0.75rem;
+  color: #888;
+  margin: 0 0 0.4rem;
+  line-height: 1.2;
+}
+.page__related .archive__item-cats-tags {
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+.page__related .archive__item-categories,
+.page__related .archive__item-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+.page__related .archive__item-category,
+.page__related .archive__item-tag {
+  font-size: 0.65rem;
+  padding: 0.18rem 0.6rem;
+  border-radius: 0.25rem;
+  background: #f3f3f3;
+  color: #4a4a4a;
+  pointer-events: none;
+  cursor: default;
 }
