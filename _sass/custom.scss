@@ -600,3 +600,13 @@ code.highlighter-rouge {
 .page__date i {
   color: #607d8b !important; /* 차분한 블루그레이 */
 }
+
+/* 메인/카드/포스트 메타의 달력·시계 아이콘을 진한 검정으로 */
+.page__meta i,
+.archive__item-body i,
+.archive__item .page__meta i,
+.archive__item-body .page__meta i,
+.page__related .page__meta i {
+  color: #111 !important;
+  opacity: 1 !important;
+}
