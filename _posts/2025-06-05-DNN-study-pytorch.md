@@ -27,7 +27,7 @@ header:
 ## 텐서 생성 관련
 
 - ✔️ `torch.empty()`
-- ❌ `torch.tensor()`
+- ✔️ `torch.tensor()`
 - ❌ `torch.from_numpy()`
 - ❌ `torch.clone()` vs `detach()`
 - ❌ `torch.as_tensor()`
