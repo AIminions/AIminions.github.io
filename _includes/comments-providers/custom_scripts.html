@@ -1,18 +1,17 @@
 <!-- start custom comments scripts -->
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // 모든 코드블럭 내 span.n 탐색
+  window.onload = function () {
     document.querySelectorAll("div.highlight span.n").forEach(function (el) {
-      // 함수 호출일 가능성이 있는 텍스트인지 확인
-      if (/^[a-zA-Z_][a-zA-Z0-9_]*$/.test(el.textContent)) {
-        const next = el.nextElementSibling;
-        // 다음 토큰이 괄호면 함수 호출로 간주
-        if (next && next.textContent.trim() === "(") {
-          el.classList.add("nf");
-        }
+      const next = el.nextElementSibling;
+      const selfEndsWithParen = /\($/.test(el.textContent);
+      if (
+        /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(el.textContent) &&
+        (next?.textContent.trim() === "(" || selfEndsWithParen)
+      ) {
+        el.classList.add("nf");
       }
     });
-  });
+  };
 </script>
 
 <!-- end custom comments scripts -->
