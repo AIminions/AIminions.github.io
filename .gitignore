@@ -30,3 +30,6 @@ codekit-config.json
 .sass-cache
 _asset_bundler_cache
 _site
+
+# 올리기전 파일
+**/_posts/tras
